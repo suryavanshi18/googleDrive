@@ -1,7 +1,7 @@
-Overview of the steps involved
-MVC (Model-View-Controller) architecture is a design pattern that is widely used in software engineering to develop complex software applications. It separates an application into three interconnected components, the Model, View, and Controller, to enhance the maintainability, scalability, and testability of the application.
+**Overview of the steps involved**
+**MVC** (Model-View-Controller) architecture is a design pattern that is widely used in software engineering to develop complex software applications. It separates an application into three interconnected components, the Model, View, and Controller, to enhance the maintainability, scalability, and testability of the application.
 
-Model:
+**Model**:
 First Create an Empty MVC Project. Name of the project: GoogleDriveRestAPI_v3
 Opening the NuGet Package Manager Console, Select the package source and install packages
 The Model component of the MVC architecture represents the business logic and data of the application. It contains the code that interacts with the database, processes the user input, and manages the application state. In other words, it encapsulates the application's data and logic, such as CRUD (Create, Read, Update, Delete) operations, validation, and data formatting.
@@ -18,13 +18,13 @@ DriveService.Scope.DriveScripts: Modify your Google apps Scripts script behavior
 
 After this create neccessary repository and class files
 
-View:
+**View:**
 The View component of the MVC architecture is responsible for rendering the application's user interface. It is a collection of HTML, CSS, and JavaScript that defines the look and feel of the application. The View receives data from the Model and displays it to the user, but it has no knowledge of how the data is stored or processed.
 
-Controller:
+**Controller:**
 The Controller component of the MVC architecture acts as the intermediary between the Model and View. It receives input from the user through the View, and it communicates with the Model to process the input and retrieve data. Once the data is processed, the Controller updates the View with the new data. It also handles user interactions, such as clicks and keystrokes, and initiates actions based on them.
 
-The MVC architecture has the following benefits:
+**The MVC architecture has the following benefits:**
 
 Separation of concerns:
 The MVC architecture separates the application's logic, data, and presentation into three distinct components, making it easier to maintain and modify each component without affecting the others.
@@ -41,7 +41,7 @@ The MVC architecture provides a flexible and scalable structure that allows for 
 
 
 
-Connecting to Google Cloud APIs requires a few steps:
+**Connecting to Google Cloud APIs requires a few steps:**
 
 Create a Google Cloud project and enable the APIs you want to use. Go to the Google Cloud Console, select or create a project, and enable the APIs you want to use under the "APIs & Services" section.
 
@@ -52,7 +52,7 @@ Install the necessary client libraries. Google provides client libraries for var
 Write code to call the API. Once you have set up authentication and installed the client libraries, you can write code to call the API. The exact code will depend on the API you are using, but typically you will create an instance of the API client using the client library, authenticate with the credentials you set up, and then call the desired API method with any required parameters.
 
 
-Steps Invloved in the project done using javascript
+**Steps Invloved in the project done using javascript**
 
 Set up a Google Cloud Platform project and enable the Google Drive API.
 Google Cloud API (Application Programming Interface) refers to the collection of APIs developed by Google that enable developers to interact with various Google Cloud services and resources, including Google Cloud Storage, Google Cloud Machine Learning, Google Cloud Datastore, and many others.
