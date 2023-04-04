@@ -1,4 +1,4 @@
-#Overview of the steps involved
+Overview of the steps involved
 MVC (Model-View-Controller) architecture is a design pattern that is widely used in software engineering to develop complex software applications. It separates an application into three interconnected components, the Model, View, and Controller, to enhance the maintainability, scalability, and testability of the application.
 
 Model:
