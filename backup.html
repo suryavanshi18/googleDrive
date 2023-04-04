@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="" en>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Connect to Google Drive</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wgt@400;700&display=swap");
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        margin: 0px;
+        text-align: center;
+      }
+      .header {
+        background-color: rgb(224, 224, 224, 0.5);
+        padding: 0px 150px;
+        line-height: 80px;
+        height: 80px;
+        border-bottom: 1px solid rgb(224, 224, 224, 0.6);
+      }
+      .title {
+        font-weight: 700;
+        font-size: 30px;
+        float: left;
+        color: #3c84f8;
+      }
+      .auth-buttons {
+        float: right;
+      }
+      .signin,
+      .signout {
+        border: 0px;
+        padding: 10px 70px;
+        background-color: #3c84f8;
+        color: white;
+        outline: none;
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      .actions {
+        padding: 0px 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="title">Connecting to Google</div>
+      <div class="auth buttons">
+        <button class="signin">signin</button>
+        <button class="signout">signout</button>
+      </div>
+    </div>
+    <div class="actions">
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="10"
+        placeholder="Enter Text here"
+      ></textarea>
+      <button class="upload">Backup</button>
+    </div>
+    <!-- <script>
+      var CLIENT_ID =
+        "995107484795-6knef7bgcvo4h035d5jojec5do4k8jcp.apps.googleusercontent.com";
+      var API_KEY = "AIzaSyDLOPEGltPwoynfKMfy6HrK1nbQlhrX6nw";
+      var DISCOVERY_DOCS = [
+        "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
+      ];
+      var SCOPES = "https://www.googleapis.com/auth/drive";
+      var signinButton = document.getElementsByClassName("signin")[0];
+      var signoutButton = document.getElementsByClassName("signout")[0];
+      function handleClientLoad() {
+        gapi.load("client:auth2", intitClient);
+      }
+      function intitClient() {
+        gapi.client
+          .init({
+            apiKey: API_KEY,
+            clientid: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES,
+          })
+          .then(function () {
+            gapi.auth2.getAuthInstance().issignedin;
+          });
+      }
+    </script> -->
+    <script>
+      const { google } = require("googleapis");
+      const auth = new google.auth.GoogleAuth({
+        keyFile: "AIzaSyDLOPEGltPwoynfKMfy6HrK1nbQlhrX6nw",
+        scopes: ["https://www.googleapis.com/auth/drive"],
+      });
+
+      const drive = google.drive({ version: "v3", auth });
+
+      drive.files
+        .list({
+          q: "'root' in parents",
+          fields: "files(id, name)",
+        })
+        .then((res) => {
+          console.log(res.data.files);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      drive.files
+        .get(
+          {
+            fileId: "FILE_ID",
+            alt: "media",
+          },
+          { responseType: "stream" }
+        )
+        .then((res) => {
+          res.data.pipe(fs.createWriteStream("path/to/downloaded/file"));
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      drive.permissions
+        .list({
+          fileId: "FILE_ID",
+          fields: "permissions(emailAddress, role)",
+        })
+        .then((res) => {
+          console.log(res.data.permissions);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      const channel = {
+        id: "UNIQUE_CHANNEL_ID",
+        type: "web_hook",
+        address: "https://YOUR_APP_DOMAIN/handle-notification",
+      };
+
+      drive.files
+        .watch({
+          fileId: "FILE_ID",
+          requestBody: {
+            id: "UNIQUE_NOTIFICATION_ID",
+            type: "web_hook",
+            address: "https://YOUR_APP_DOMAIN/handle-notification",
+            expiration: Date.now() + 86400000, // 24 hours
+            payload: true,
+            channel,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    </script>
+    <script src="https://apis.google.com/js/api.js"></script>
+  </body>
+</html>
